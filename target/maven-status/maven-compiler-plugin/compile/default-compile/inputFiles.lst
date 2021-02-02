@@ -1,0 +1,17 @@
+/home/vadim/course/src/main/java/com/company/course/application/dao/impl/FileClientDaoImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/service/CoachService.java
+/home/vadim/course/src/main/java/com/company/course/application/controller/Main.java
+/home/vadim/course/src/main/java/com/company/course/application/entity/Coach.java
+/home/vadim/course/src/main/java/com/company/course/application/service/impl/ClientServiceImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/service/impl/CoachServiceImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/impl/SqlClientDaoImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/ClientDao.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/DaoProvider.java
+/home/vadim/course/src/main/java/com/company/course/application/entity/Gender.java
+/home/vadim/course/src/main/java/com/company/course/application/entity/Client.java
+/home/vadim/course/src/main/java/com/company/course/application/service/ClientService.java
+/home/vadim/course/src/main/java/com/company/course/application/controller/Console.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/impl/FileCoachDaoImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/impl/CoachDaoImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/impl/ClientDaoImpl.java
+/home/vadim/course/src/main/java/com/company/course/application/dao/CoachDao.java

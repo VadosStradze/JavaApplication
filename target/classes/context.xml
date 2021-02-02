@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<bean id="dbClientDao"
+          class="com.company.course.application.dao.impl.DBClientDaoImpl ">
+    </bean>
+
+    <bean id="dbCoachDao"
+          class="com.company.course.application.dao.impl.DBCoachDaoImpl">
+    </bean>
+    <bean id="dbClientService"
+          class="com.company.course.application.service.impl.ClientServiceImpl">
+        <constructor-arg index="0" ref="dbClientDao"/>
+    </bean>
+    <bean id="dbCoachService"
+          class="com.company.course.application.service.impl.CoachServiceImpl">
+        <constructor-arg index="0" ref="dbCoachDao"/>
+    </bean>
+    <bean id="console"
+          class="com.company.course.application.controller.Console">
+        <constructor-arg index="0" ref="dbCoachService"/>
+        <constructor-arg index="1" ref="dbClientService"/>
+    </bean>-->
+
+   <!--<context:component-scan base-package="com.company.course.application"/>-->
+
+</beans>
