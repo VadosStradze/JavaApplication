@@ -11,8 +11,8 @@ public interface CoachDao {
 
     void deleteById(Long id);
     Coach findById(Long id) throws IOException;
-    Coach getById(Long id);
-    List<Coach> showAll();
+
+    List<Coach> showAll()throws IOException;
     Coach update(Long id,Coach coach) throws IOException;
 }
 

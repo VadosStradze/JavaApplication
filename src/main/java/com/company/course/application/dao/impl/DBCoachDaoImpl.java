@@ -2,6 +2,7 @@ package com.company.course.application.dao.impl;
 
 import com.company.course.application.dao.CoachDao;
 
+import com.company.course.application.dao.IDao;
 import com.company.course.application.entity.Coach;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 @Repository
-public class DBCoachDaoImpl implements CoachDao {
+public class DBCoachDaoImpl implements IDao<Coach> {
 
     @Override
     public Coach add(Coach coach) {
@@ -35,7 +36,7 @@ public class DBCoachDaoImpl implements CoachDao {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void delete(Long id) {
         try {
             PreparedStatement statement = createStatement("DELETE FROM coach WHERE coach_id = (?) ");
             statement.setLong(1, id);
@@ -47,7 +48,7 @@ public class DBCoachDaoImpl implements CoachDao {
     }
 
     @Override
-    public Coach findById(Long id) throws IOException {
+    public Coach findById(Long id)  {
         Coach coachById = new Coach();
         try {
             PreparedStatement statement = createStatement("Select coach_id,first_name,last_name,gender,experience FROM coach WHERE coach_id = (?)");
@@ -79,14 +80,10 @@ public class DBCoachDaoImpl implements CoachDao {
 
 
 
-    @Override
-    public Coach getById(Long id) {
-        return null;
-    }
+
 
     @Override
-    // TODO: 26.01.2021 Решить проблему с ID Клиента в программе!
-    public Coach update(Long id, Coach coach) throws IOException {
+    public Coach updateById(Long id, Coach coach)  {
         try {
             PreparedStatement statement = createStatement("UPDATE coach Set first_name = (?),last_name = (?), gender = (?), experience = (?) WHERE coach_id = (?)");
             statement.setLong(5, id);

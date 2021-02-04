@@ -11,7 +11,6 @@ public interface CoachService {
     Coach add(Coach coach);
     List<Coach> showAll();
     Coach findById(Long id)  throws IOException;
-    Coach getById(Long id);
     void deleteById(Long id);
     Coach update(Long id,Coach coach);
 

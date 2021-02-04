@@ -3,9 +3,7 @@ package com.company.course.application.controller;
 import com.company.course.application.entity.Client;
 import com.company.course.application.entity.Coach;
 import com.company.course.application.entity.Gender;
-import com.company.course.application.service.ClientService;
-import com.company.course.application.service.CoachService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.course.application.service.IService;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,20 +12,15 @@ import java.util.Scanner;
 @Component
 public class Console {
 
-    @Autowired
-    public Console(CoachService coachService,ClientService clientService){
-        this.coachService= coachService;
+    private final IService<Coach> coachService;
+    private final IService<Client> clientService;
+
+    public Console(IService<Coach> coachService, IService<Client> clientService) {
+        this.coachService = coachService;
         this.clientService = clientService;
     }
 
-
-    private CoachService coachService;
-
-
-    private ClientService clientService;
-
     public void menu() {
-
 
 
         //Связи
@@ -76,7 +69,7 @@ public class Console {
                     id = scanner.nextInt();
                     try {
                         System.out.println(coachService.findById(id));
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -86,8 +79,12 @@ public class Console {
                     coachService.deleteById(id);
                     break;
                 case 4:
-                    for (Coach finder : coachService.showAll()) {
-                        System.out.println(finder.toString());
+                    try{
+                        for (Coach finder : coachService.showAll()) {
+                            System.out.println(finder.toString());
+                        }
+                    }catch (Exception e){
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 5:
@@ -168,6 +165,7 @@ public class Console {
                     if (value == 1) {
                         Long coachId = scanner.nextLong();
                         try {
+                            //////////////////////////
                             if (coachId == coachService.findById(coachId).getId()) {
                                 client.setCoachId(coachId);
                             } else {
@@ -186,11 +184,11 @@ public class Console {
                     id = scanner.nextInt();
                     try {
                         System.out.println(clientService.findById(id));
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         System.out.println(e);
                     }
 
-                    //System.out.println(clientService.getById(id));
+
                     break;
                 case 8:
                     System.out.print("Enter client id to delete:" + '\n' + "> ");
@@ -198,9 +196,14 @@ public class Console {
                     clientService.deleteById(id);
                     break;
                 case 9:
-                    for (Client ct : clientService.showAll()) {
-                        System.out.println(ct.toString());
+                    try{
+                        for (Client finder : clientService.showAll()) {
+                            System.out.println(finder.toString());
+                        }
+                    }catch (Exception e){
+                        System.out.println(e.getMessage());
                     }
+
 
 
                     break;

@@ -15,11 +15,11 @@
           class="com.company.course.application.dao.impl.DBCoachDaoImpl">
     </bean>
     <bean id="dbClientService"
-          class="com.company.course.application.service.impl.ClientServiceImpl">
+          class="ClientIService">
         <constructor-arg index="0" ref="dbClientDao"/>
     </bean>
     <bean id="dbCoachService"
-          class="com.company.course.application.service.impl.CoachServiceImpl">
+          class="CoachIService">
         <constructor-arg index="0" ref="dbCoachDao"/>
     </bean>
     <bean id="console"

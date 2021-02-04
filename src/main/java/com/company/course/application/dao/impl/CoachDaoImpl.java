@@ -42,16 +42,7 @@ public class CoachDaoImpl implements CoachDao {
         return null;
     }
 
-    @Override
-    //находим тренера по Id
-    public Coach getById(Long id) {
-        for (Coach finder : coachList) {
-            if (finder.getId().equals(id)) {
-                return finder;
-            }
-        }
-        return null;
-    }
+
 
     @Override
     public List<Coach> showAll() {

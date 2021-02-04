@@ -87,7 +87,7 @@ public class FileClientDaoImpl implements ClientDao {
      **/
     @Override
     public Client findById(Long id) throws IOException {
-        for (Client finder : getAll()) {
+        for (Client finder : showAll()) {
             if (finder.getId().equals(id)) {
                 return finder;
             }
@@ -97,8 +97,16 @@ public class FileClientDaoImpl implements ClientDao {
 
     }
 
+
+
+
     @Override
-    public List<Client> getAll() throws IOException {//getAll List<Client> считываем из файла и создаем обьект
+    public Client updateById(Long id, Client client) throws IOException {
+        return null;
+    }
+
+    @Override
+    public List<Client> showAll() throws IOException {
         List<Client> clientList = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(RESOURCE_FILE_CLIENT_TXT));
         String value;
@@ -111,24 +119,7 @@ public class FileClientDaoImpl implements ClientDao {
             clientList.add(newClient);
         }
         return clientList;
-    }
 
-
-    @Override
-    public Client getById(Long id) {
-
-
-        return null;
-    }
-
-    @Override
-    public Client updateById(Long id, Client client) throws IOException {
-        return null;
-    }
-
-    @Override
-    public List<Client> showAll() {
-        return null;
     }
 
 

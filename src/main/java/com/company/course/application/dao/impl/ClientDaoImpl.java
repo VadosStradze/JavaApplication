@@ -34,25 +34,18 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public Client findById(Long id) throws IOException {
-        return null;
-    }
-
-    @Override
-    public List<Client> getAll() throws IOException {
-        return null;
-    }
-
-
-
-    @Override
-    public Client getById(Long id) {
         for (Client finder : clientList) {
             if (finder.getId().equals(id)) {
                 return finder;
             }
         }
         return null;
+
     }
+
+
+
+
 
     @Override
     public Client updateById(Long id, Client client) throws IOException {

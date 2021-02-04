@@ -10,9 +10,7 @@ public interface ClientDao {
     Client add(Client client);
 
     void deleteById(Long id);
-    Client findById(Long id) throws IOException;//File
-    List<Client> getAll() throws IOException;
-    Client getById(Long id);
+    Client findById(Long id) throws IOException;
     Client updateById(Long id,Client client) throws IOException;
-    List<Client> showAll();
+    List<Client> showAll() throws IOException;
 }
