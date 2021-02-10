@@ -1,12 +1,10 @@
 package com.company.course.application.controller;
 
-import com.company.course.application.entity.Client;
-import com.company.course.application.entity.Coach;
-import com.company.course.application.entity.Gender;
+import com.company.course.application.entity.*;
 import com.company.course.application.service.IService;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 @Component
@@ -14,10 +12,15 @@ public class Console {
 
     private final IService<Coach> coachService;
     private final IService<Client> clientService;
+    private final IService<Address> addressService;
+    private final IService<Gym> gymService;
 
-    public Console(IService<Coach> coachService, IService<Client> clientService) {
+    public Console(IService<Coach> coachService, IService<Client> clientService, IService<Address> addressService, IService<Gym> gymService) {
+        this.addressService = addressService;
+        this.gymService = gymService;
         this.coachService = coachService;
         this.clientService = clientService;
+
     }
 
     public void menu() {
@@ -62,6 +65,10 @@ public class Console {
                             coach.setSex("NO DATA");
                             break;
                     }
+                    System.out.println("Enter coach gym");
+                    Long coachGym = scanner.nextLong();
+                    coach.setGymId(coachGym);
+
                     coachService.add(coach);
                     break;
                 case 2:
@@ -79,11 +86,11 @@ public class Console {
                     coachService.deleteById(id);
                     break;
                 case 4:
-                    try{
+                    try {
                         for (Coach finder : coachService.showAll()) {
                             System.out.println(finder.toString());
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -196,14 +203,13 @@ public class Console {
                     clientService.deleteById(id);
                     break;
                 case 9:
-                    try{
+                    try {
                         for (Client finder : clientService.showAll()) {
                             System.out.println(finder.toString());
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
-
 
 
                     break;
@@ -229,11 +235,60 @@ public class Console {
                         updateGender = Gender.woman.getGender();
                         updateClient.setSex(updateGender);
                     } else {
-
-
+                        System.out.println("Gender wasn't been updated!");
                     }
+                    System.out.println("Enter new client coach ID:");
+                    Long newCoachId = scanner.nextLong();
+                    updateClient.setCoachId(newCoachId);
+
 
                     clientService.update(id, updateClient);
+                    break;
+                case 11:
+                    Gym gym = new Gym();
+                    scanner.nextLine();
+                    System.out.println("Enter new gym name:");
+                    String newGymName = scanner.nextLine();
+                    gym.setGymName(newGymName);
+                    System.out.println("Enter addressId:");
+                    Long addressId = scanner.nextLong();
+                    gym.setAddressId(addressId);
+                    gymService.add(gym);
+                    break;
+                case 12:
+                    Address address = new Address();
+                    scanner.nextLine();
+                    System.out.println("Enter gym city:");
+                    String city = scanner.nextLine();
+                    address.setCity(city);
+                    System.out.println("Enter country");
+                    String country = scanner.nextLine();
+                    address.setCountry(country);
+                    System.out.println("Enter gym address:");
+                    String gymAddress = scanner.nextLine();
+                    address.setAddress(gymAddress);
+                    addressService.add(address);
+                    break;
+                case 13:
+                    System.out.println("Enter coach id :");
+                    Long newCoachGym = scanner.nextLong();
+                    Coach newCoach = coachService.findById(newCoachGym);
+                    System.out.println("Enter new coach gym id:");
+                    Long newGymId = scanner.nextLong();
+                    newCoach.setGymId(newGymId);
+                    coachService.update(newCoach.getId(), newCoach);
+                    List<Client> coachByIdList = clientService.findByCoachId(newCoachGym);
+                    for (Client rez:coachByIdList) {
+                        System.out.println(rez.toString());
+                    }
+                    for (Client finder:coachByIdList) {
+
+                        finder.setCoachId(null);
+                        clientService.update(finder.getId(),finder);
+
+                    }
+                    break;
+                case 14:
                     break;
                 case 0:
                     scanner.close();

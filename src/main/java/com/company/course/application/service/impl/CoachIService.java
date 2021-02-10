@@ -1,22 +1,26 @@
 package com.company.course.application.service.impl;
 
-import com.company.course.application.dao.CoachDao;
 import com.company.course.application.dao.IDao;
 import com.company.course.application.entity.Coach;
 import com.company.course.application.service.IService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 
 @Service
+
 public class CoachIService implements IService<Coach> {
 
-    private IDao<Coach> coachDao;
 
 
-    public CoachIService(IDao<Coach> coachDao) {
+    private  IDao<Coach> coachDao;
+
+
+    @Autowired
+    public CoachIService(@Qualifier("coachDaoSpringJdbc") IDao<Coach> coachDao) {
         this.coachDao = coachDao;
     }
 
@@ -37,7 +41,10 @@ public class CoachIService implements IService<Coach> {
         return coachDao.findById(id);
     }
 
-
+    @Override
+    public List<Coach> findByCoachId(Long coachId) {
+        return null;
+    }
 
 
     @Override

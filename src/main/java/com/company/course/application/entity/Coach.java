@@ -12,6 +12,13 @@ public class Coach implements Serializable {
     private String lastName;
     private String sex;
 
+    public Coach(String firstName, String lastName, String sex, Integer experience) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sex = sex;
+        this.experience = experience;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -23,10 +30,21 @@ public class Coach implements Serializable {
     private Integer experience;
     private Set<Long> clientId;
 
+    public Long getGymId() {
+        return gymId;
+    }
+
+    public void setGymId(Long gymId) {
+        this.gymId = gymId;
+    }
+
+    private Long gymId;
+
     public Set<Long> getClientId() {
         return clientId;
     }
-    public void addClient(Client client){ /////////////////////////////Добавление айди клиента в коч
+
+    public void addClient(Client client) { /////////////////////////////Добавление айди клиента в коч
         clientId.add(client.getId());
     }
 
@@ -39,11 +57,12 @@ public class Coach implements Serializable {
         this.clientId = new HashSet<>();
     }
 
-    public Coach(String firstName, String lastName, String sex, Integer experience) {
+    public Coach(String firstName, String lastName, String sex, Integer experience, Long gymId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
         this.experience = experience;
+        this.gymId = gymId;
         this.clientId = new HashSet<>();
     }
 
@@ -54,7 +73,6 @@ public class Coach implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public Integer getExperience() {
@@ -78,12 +96,12 @@ public class Coach implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Coach coach = (Coach) o;
-        return sex == coach.sex && Objects.equals(firstName, coach.firstName) && Objects.equals(lastName, coach.lastName) && Objects.equals(experience, coach.experience) /*&& Objects.equals(clientList, coach.clientList)*/;
+        return Objects.equals(id, coach.id) && Objects.equals(firstName, coach.firstName) && Objects.equals(lastName, coach.lastName) && Objects.equals(sex, coach.sex) && Objects.equals(experience, coach.experience) && Objects.equals(clientId, coach.clientId) && Objects.equals(gymId, coach.gymId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, sex, experience); //clientList);
+        return Objects.hash(id, firstName, lastName, sex, experience, clientId, gymId);
     }
 
     public String getFirstName() {
@@ -104,12 +122,14 @@ public class Coach implements Serializable {
 
     @Override
     public String toString() {
-        return "Coach{" + "Id= " + id +
-                " firstName='" + firstName + '\'' +
+        return "Coach{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", sex=" + sex +
+                ", sex='" + sex + '\'' +
                 ", experience=" + experience +
                 ", clientId=" + clientId +
+                ", gymId=" + gymId +
                 '}';
     }
 }

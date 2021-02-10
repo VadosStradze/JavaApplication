@@ -4,8 +4,11 @@ import com.company.course.application.dao.CoachDao;
 
 import com.company.course.application.dao.IDao;
 import com.company.course.application.entity.Coach;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,8 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-@Repository
+
+@Repository("dbCoachDaoImpl")
 public class DBCoachDaoImpl implements IDao<Coach> {
+
+
 
     @Override
     public Coach add(Coach coach) {
@@ -25,7 +31,7 @@ public class DBCoachDaoImpl implements IDao<Coach> {
             statement.setString(1, coach.getFirstName());
             statement.setString(2, coach.getLastName());
             statement.setString(3, coach.getSex());
-            statement.setInt(4,coach.getExperience());
+            statement.setInt(4, coach.getExperience());
             statement.execute();
 
         } catch (SQLException e) {
@@ -48,7 +54,7 @@ public class DBCoachDaoImpl implements IDao<Coach> {
     }
 
     @Override
-    public Coach findById(Long id)  {
+    public Coach findById(Long id) {
         Coach coachById = new Coach();
         try {
             PreparedStatement statement = createStatement("Select coach_id,first_name,last_name,gender,experience FROM coach WHERE coach_id = (?)");
@@ -69,7 +75,6 @@ public class DBCoachDaoImpl implements IDao<Coach> {
                 coachById.setId(coachId);
 
 
-
             }
             return coachById;
         } catch (SQLException e) {
@@ -79,18 +84,15 @@ public class DBCoachDaoImpl implements IDao<Coach> {
     }
 
 
-
-
-
     @Override
-    public Coach updateById(Long id, Coach coach)  {
+    public Coach updateById(Long id, Coach coach) {
         try {
             PreparedStatement statement = createStatement("UPDATE coach Set first_name = (?),last_name = (?), gender = (?), experience = (?) WHERE coach_id = (?)");
             statement.setLong(5, id);
             statement.setString(1, coach.getFirstName());
             statement.setString(2, coach.getLastName());
             statement.setString(3, coach.getSex());
-            statement.setInt(4,coach.getExperience());
+            statement.setInt(4, coach.getExperience());
             statement.execute();
 
             System.out.println(coach.toString());
@@ -117,7 +119,7 @@ public class DBCoachDaoImpl implements IDao<Coach> {
                 String gender = result.getString(4);
                 int experience = result.getInt(5);
                 Long id = result.getLong(1);
-                Coach coach = new Coach(firstName,lastName,gender,experience);
+                Coach coach = new Coach(firstName, lastName, gender, experience);
                 coach.setId(id);
                 coachList.add(coach);
             }
@@ -130,7 +132,10 @@ public class DBCoachDaoImpl implements IDao<Coach> {
 
     }
 
-
+    @Override
+    public List<Coach> findByCoachId(Long coachId) {
+        return null;
+    }
 
 
     public static Connection getConnection() throws SQLException {
@@ -143,7 +148,7 @@ public class DBCoachDaoImpl implements IDao<Coach> {
             String url = properties.getProperty("db.url");
 
             return DriverManager.getConnection(url, userName, password);
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,6 +3,8 @@ package com.company.course.application.service.impl;
 import com.company.course.application.dao.IDao;
 import com.company.course.application.entity.Client;
 import com.company.course.application.service.IService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +14,18 @@ public class ClientIService implements IService<Client> {
 
     private final IDao<Client> clientDao;
 
-    public ClientIService(IDao<Client> clientDao) {
+    @Autowired
+    public ClientIService(@Qualifier("clientDaoSpringJdbc") IDao<Client> clientDao) {
         this.clientDao = clientDao;
     }
 
-
+    public List<Client> findByCoachId(Long coachId){
+        return clientDao.findByCoachId(coachId);
+    }
     @Override
     public Client findById(Long id) {
         return clientDao.findById(id);
     }
-
 
     @Override
     public Client add(Client client) {
@@ -50,8 +54,7 @@ public class ClientIService implements IService<Client> {
             System.out.println(e.getMessage());
         }
 
-
         return null;
     }
 }
-// TODO: 27.12.2020 Доделать DeleteById Client service
+

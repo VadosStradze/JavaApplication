@@ -3,9 +3,12 @@ package com.company.course.application.dao.impl;
 import com.company.course.application.dao.ClientDao;
 import com.company.course.application.dao.IDao;
 import com.company.course.application.entity.Client;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 
+import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,10 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-@Repository
+@Repository("dbClientDaoImpl")
 public class DBClientDaoImpl implements IDao<Client> {
 
-    @Override
+
+
     public Client add(Client client) {
         try {
 
@@ -125,6 +129,11 @@ public class DBClientDaoImpl implements IDao<Client> {
         }
         return clientList;
 
+    }
+
+    @Override
+    public List<Client> findByCoachId(Long coachId) {
+        return null;
     }
 
 
